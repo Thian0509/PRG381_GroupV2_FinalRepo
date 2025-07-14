@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/thian/OneDrive/Documents/GitHub/PRG381_GroupV2_FinalRepo/Milestone%201/PRG381_GroupV2_WebApp/src/java/servlets/LoginServlet.java</file>
+            <file>file:/C:/Users/thian/OneDrive/Documents/GitHub/PRG381_GroupV2_FinalRepo/Milestone%201/PRG381_GroupV2_WebApp/web/register.jsp</file>
+            <file>file:/C:/Users/thian/OneDrive/Documents/GitHub/PRG381_GroupV2_FinalRepo/Milestone%201/PRG381_GroupV2_WebApp/web/index.jsp</file>
+            <file>file:/C:/Users/thian/OneDrive/Documents/GitHub/PRG381_GroupV2_FinalRepo/Milestone%201/PRG381_GroupV2_WebApp/web/login.jsp</file>
+            <file>file:/C:/Users/thian/OneDrive/Documents/GitHub/PRG381_GroupV2_FinalRepo/Milestone%201/PRG381_GroupV2_WebApp/web/dashboard.jsp</file>
+            <file>file:/C:/Users/thian/OneDrive/Documents/GitHub/PRG381_GroupV2_FinalRepo/Milestone%201/PRG381_GroupV2_WebApp/src/java/servlets/RegisterServlet.java</file>
+        </group>
     </open-files>
 </project-private>

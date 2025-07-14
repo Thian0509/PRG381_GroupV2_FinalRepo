@@ -12,6 +12,6 @@
         <title>Dashboard JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!, this is my Dashboard page</h1>
+        <h1>Hello World! this is my Dashboard page</h1>
     </body>
 </html>
