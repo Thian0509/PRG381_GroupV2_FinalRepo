@@ -12,58 +12,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View All Users</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/public/styles.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css">
         
         <style>
-            /* Body Styles */
-            *{
-                box-sizing: border-box;
-            }
-            body {
-                margin: 0;
-                font-family: Arial, sans-serif;
-            }
-
-            /* Navbar styles */
-            .navbar {
-                background-color: #333;
-                overflow: hidden;
-            }
-
-            .navbar a {
-                float: left;
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 20px;
-                text-decoration: none;
-            }
-
-
-            .navbar a:hover {
-                background-color: #575757;
-            }
-
-
-            .navbar a.right {
-                float: right;
-            }
-
-
-            .content {
-                padding: 20px;
-            }
-
-            /* Content styles*/
-
-            .content{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                margin: 0;
-            }
+            /* Table Styles (Users.jsp) */
             table {
                 border-collapse: collapse;
                 width: 50%;
