@@ -1,4 +1,4 @@
-package mvc.auth;
+package security;
 
 public class Auth implements IAuth
 {

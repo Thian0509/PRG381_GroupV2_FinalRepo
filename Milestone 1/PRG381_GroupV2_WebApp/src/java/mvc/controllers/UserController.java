@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
 import mvc.models.*;
 
-@WebServlet(name = "UserController", urlPatterns = {"/","/user"})
+@WebServlet(name = "UserController", urlPatterns = {"/user"})
 public class UserController extends HttpServlet 
 {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException

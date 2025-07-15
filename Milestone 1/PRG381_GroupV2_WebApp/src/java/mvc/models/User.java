@@ -1,8 +1,9 @@
 package mvc.models;
 
+import database.IDatabaseOperations;
+import database.Database;
 import java.util.ArrayList;
 import java.util.List;
-import mvc.database.*;
 import java.sql.*;
 public class User implements IDatabaseOperations<User>
 {

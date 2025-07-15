@@ -1,4 +1,4 @@
-package mvc.database;
+package database;
 import java.util.*;
 
 public interface IDatabaseOperations<T> //<T> means any type so T can be String,Integer or User based on implementation at class which uses it.

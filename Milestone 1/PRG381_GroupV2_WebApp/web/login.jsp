@@ -4,14 +4,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/public/styles.css">
     </head>
     <body>
         <div class="navbar">
-            <a href="http://localhost:8080/PRG381_GroupV2_WebApp/index.jsp">Home</a>
-            <a href="http://localhost:8080/PRG381_GroupV2_WebApp/register.jsp">Register</a>
-            <a href="http://localhost:8080/PRG381_GroupV2_WebApp/dashboard.jsp">Dashboard</a>
-            <a href="http://localhost:8080/PRG381_GroupV2_WebApp/user">Users</a>
+            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/index.jsp">Home</a>
+            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/register.jsp">Register</a>
+            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/dashboard.jsp">Dashboard</a>
+            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/user">Users</a>
         </div>
 
         <div class="content">
