@@ -4,17 +4,42 @@
  */
 package prg381_groupv2_desktopapp;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author thian
  */
 public class DashboardGUI extends javax.swing.JFrame {
+    
+    private AppointmentGUI appointmentPanel;
+    private CounselorGUI counselorPanel;
+    private FeedbackGUI feedbackPanel;
 
     /**
      * Creates new form DashboardGUI
      */
     public DashboardGUI() {
         initComponents();
+        
+        // Initialize content panels
+        appointmentPanel = new AppointmentGUI();
+        counselorPanel = new CounselorGUI();
+        feedbackPanel = new FeedbackGUI();
+
+        // Set layout and add cards to mainPanel
+        mainPanel.setLayout(new CardLayout());
+        mainPanel.add(appointmentPanel, "appointments");
+        mainPanel.add(counselorPanel, "counselors");
+        mainPanel.add(feedbackPanel, "feedback");
+
+        // Set default card
+        showCard("appointments");
+    }
+    
+    private void showCard(String name) {
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+        cl.show(mainPanel, name);
     }
 
     /**
@@ -26,21 +51,115 @@ public class DashboardGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mainPanel = new javax.swing.JPanel();
+        navPanel = new javax.swing.JPanel();
+        btnAppointments = new javax.swing.JButton();
+        btnCounselors = new javax.swing.JButton();
+        btnFeedback = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        mainPanel.setLayout(new java.awt.CardLayout());
+
+        btnAppointments.setText("Appointments");
+        btnAppointments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAppointmentsActionPerformed(evt);
+            }
+        });
+
+        btnCounselors.setText("Counselors");
+        btnCounselors.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCounselorsActionPerformed(evt);
+            }
+        });
+
+        btnFeedback.setText("Feedback");
+        btnFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFeedbackActionPerformed(evt);
+            }
+        });
+
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout navPanelLayout = new javax.swing.GroupLayout(navPanel);
+        navPanel.setLayout(navPanelLayout);
+        navPanelLayout.setHorizontalGroup(
+            navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCounselors, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addComponent(btnFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        navPanelLayout.setVerticalGroup(
+            navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAppointments)
+                    .addComponent(btnCounselors)
+                    .addComponent(btnFeedback)
+                    .addComponent(btnExit))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(navPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(navPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAppointmentsActionPerformed
+        // TODO add your handling code here:
+        showCard("appointments");
+    }//GEN-LAST:event_btnAppointmentsActionPerformed
+
+    private void btnCounselorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCounselorsActionPerformed
+        // TODO add your handling code here:
+        showCard("counselors");
+    }//GEN-LAST:event_btnCounselorsActionPerformed
+
+    private void btnFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeedbackActionPerformed
+        // TODO add your handling code here:
+        showCard("feedback");
+    }//GEN-LAST:event_btnFeedbackActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +197,11 @@ public class DashboardGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAppointments;
+    private javax.swing.JButton btnCounselors;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnFeedback;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel navPanel;
     // End of variables declaration//GEN-END:variables
 }
