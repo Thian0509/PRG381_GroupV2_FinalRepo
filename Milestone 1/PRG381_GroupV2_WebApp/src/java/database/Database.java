@@ -1,7 +1,7 @@
 package database;
 import java.sql.*;
 
-public class Database 
+public class Database
 {
     private static final String Postgresql_JDBC_Driver_Name = "org.postgresql.Driver";
     private static final String JDBC_Postgresql_Host = "jdbc:postgresql://localhost:5432/";  //each one must use own network config to pgadmin4

@@ -8,14 +8,24 @@
     </head>
     <body>
         <div class="navbar">
-            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/index.jsp">Home</a>
-            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/register.jsp">Register</a>
-            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/dashboard.jsp">Dashboard</a>
-            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/user">Users</a>
+            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/register">Register</a>
+            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/dashboard">Dashboard</a>
         </div>
 
         <div class="content">
             <h1>Login Form</h1>
+            <c:if test="${not empty errorMessage}">
+                <div class="error">${errorMessage}</div>
+            </c:if>
+            <form action="login" method="post">
+                Email: <input type="email" name="email" required/>
+                <br><br>
+                Password: <input type="password" name="password" required/>
+                <br><br>
+                <button type="submit">Login</button>
+            </form>
+            
+            
         </div>
     </body>
 </html>
