@@ -14,7 +14,7 @@ public class DashboardGUI extends javax.swing.JFrame {
     private CounselorGUI counselorGUI;
     private FeedbackGUI feedbackGUI;
 
-    public DashboardGUI() {
+    public DashboardGUI() throws ClassNotFoundException {
         initComponents();
         setupMainPanel();
         setupEventListeners();
@@ -23,7 +23,7 @@ public class DashboardGUI extends javax.swing.JFrame {
         setTitle("Student Wellness Management System");
     }
 
-    private void setupMainPanel() {
+    private void setupMainPanel() throws ClassNotFoundException {
         mainPanel.setLayout(new CardLayout());
         
         // Initialize GUI panels
@@ -249,7 +249,14 @@ public class DashboardGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardGUI().setVisible(true);
+                try 
+                {
+                    new DashboardGUI().setVisible(true);
+                } 
+                catch (ClassNotFoundException ex) 
+                {
+                    System.getLogger(DashboardGUI.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }
