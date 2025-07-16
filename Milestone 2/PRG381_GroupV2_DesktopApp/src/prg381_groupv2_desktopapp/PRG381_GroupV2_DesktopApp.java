@@ -38,28 +38,10 @@ public class PRG381_GroupV2_DesktopApp {
         }
     }
     
-    private static void initializeDatabase() {
-        try {
-            // Test database connection
-            DBConnection.getWellnessConnection().close();
-            
-            // Create tables if they don't exist
-            DBConnection.createTables();
-            
-            System.out.println("Database initialized successfully");
-            
-        } catch (SQLException e) {
-            System.err.println("Database initialization failed: " + e.getMessage());
-            e.printStackTrace();
-            
-            // Show error dialog
-            JOptionPane.showMessageDialog(null, 
-                "Database connection failed!\nPlease ensure JavaDB/Derby is available.\n\nError: " + e.getMessage(),
-                "Database Error", 
-                JOptionPane.ERROR_MESSAGE);
-            
-            System.exit(1);
-        }
+    private static void initializeDatabase() 
+    {
+        DBConnection dBConnection = new DBConnection();
+        dBConnection.initialize();
     }
     
     private static void setLookAndFeel() {

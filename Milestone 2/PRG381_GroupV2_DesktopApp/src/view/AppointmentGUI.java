@@ -19,7 +19,8 @@ public class AppointmentGUI extends javax.swing.JPanel {
     private CounselorController counselorController;
     private DefaultTableModel tableModel;
 
-    public AppointmentGUI() {
+    public AppointmentGUI() throws ClassNotFoundException 
+    {
         appointmentController = new AppointmentController();
         counselorController = new CounselorController();
         initComponents();
@@ -82,16 +83,22 @@ public class AppointmentGUI extends javax.swing.JPanel {
         txtTime.setToolTipText("Enter time in HH:MM format (e.g., " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")) + ")");
     }
 
-    private void loadStudentsFromBCDatabase() {
+    private void loadStudentsFromBCDatabase() throws ClassNotFoundException {
         cbStudent.removeAllItems();
         cbStudent.addItem("Select Student");
-
-        List<User> students = DBConnection.getStudentObjectsFromBCStudents();
-        if (students.isEmpty()) {
+        
+        DBConnection dBConnection = new DBConnection();
+        List<User> students = dBConnection.getStudentObjectsFromWellnessDB();
+        
+        if (students.isEmpty())
+        {
             // Optionally show a message instead of adding fake data:
             JOptionPane.showMessageDialog(this, "No students found in database.", "Warning", JOptionPane.WARNING_MESSAGE);
-        } else {
-            for (User s : students) {
+        } 
+        else 
+        {
+            for (User s : students) 
+            {
                 cbStudent.addItem(s.getName() + " " + s.getSurname());
             }
         }

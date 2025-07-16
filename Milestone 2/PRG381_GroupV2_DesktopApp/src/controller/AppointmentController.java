@@ -6,27 +6,28 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentController {
+public class AppointmentController 
+{
     private WellnessManager wellnessManager;
+    private DBConnection dBConnection;
     
-    public AppointmentController() {
-        this.wellnessManager = WellnessManager.getInstance();
-        try {
-            DBConnection.createTables();
-        } catch (Exception e) {
-            System.err.println("Failed to initialize database: " + e.getMessage());
-        }
+    public AppointmentController() 
+    {
+        this.dBConnection = new DBConnection();
+        this.wellnessManager = WellnessManager.getInstance();        
     }
     
-    public boolean addAppointment(Appointment appointment) {
+    public boolean addAppointment(Appointment appointment) throws ClassNotFoundException 
+    {
+        Connection conn = dBConnection.getWellnessConnection();
+        
         // Simple validation
         if (!isValidAppointment(appointment)) {
             return false;
         }
         
         String sql = "INSERT INTO appointments (student, counselor, date, time, status) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DBConnection.getWellnessConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             
             pstmt.setString(1, appointment.getStudent());
             pstmt.setString(2, appointment.getCounselor());
@@ -39,19 +40,23 @@ public class AppointmentController {
                 wellnessManager.addAppointment(appointment);
             }
             return result;
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             e.printStackTrace();
             return false;
         }
     }
 
-    public List<Appointment> getAllAppointments() {
+    public List<Appointment> getAllAppointments()throws ClassNotFoundException 
+    {
         List<Appointment> appointments = new ArrayList<>();
         String sql = "SELECT * FROM appointments ORDER BY date, time";
+
+        Connection conn = dBConnection.getWellnessConnection();
         
-        try (Connection conn = DBConnection.getWellnessConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try ( Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) 
+        {
             
             while (rs.next()) {
                 appointments.add(new Appointment(
@@ -63,12 +68,17 @@ public class AppointmentController {
                     rs.getString("status")
                 ));
             }
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             e.printStackTrace();
         }
         return appointments;
     }
-    private boolean isValidAppointment(Appointment appointment) {
+    
+    
+    private boolean isValidAppointment(Appointment appointment) 
+    {
         return appointment.getStudent() != null && !appointment.getStudent().trim().isEmpty() &&
                appointment.getCounselor() != null && !appointment.getCounselor().trim().isEmpty() &&
                appointment.getDate() != null && !appointment.getDate().trim().isEmpty() &&

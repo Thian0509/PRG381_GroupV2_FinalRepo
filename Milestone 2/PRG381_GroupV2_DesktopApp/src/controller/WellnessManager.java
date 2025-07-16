@@ -7,7 +7,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 // Singleton pattern and collections management
-public class WellnessManager {
+public class WellnessManager 
+{
     private static WellnessManager instance;
     
     // Collections for managing data
@@ -17,7 +18,8 @@ public class WellnessManager {
     private Map<String, List<Appointment>> appointmentsByStudent;
     private Set<String> availableCounselors;
     
-    private WellnessManager() {
+    private WellnessManager() 
+    {
         appointments = new ArrayList<>();
         counselors = new ArrayList<>();
         feedbackList = new ArrayList<>();
@@ -26,15 +28,18 @@ public class WellnessManager {
     }
     
     // Singleton pattern
-    public static WellnessManager getInstance() {
-        if (instance == null) {
+    public static WellnessManager getInstance() 
+    {
+        if (instance == null) 
+        {
             instance = new WellnessManager();
         }
         return instance;
     }
     
     // Collections management methods
-    public void addAppointment(Appointment appointment) {
+    public void addAppointment(Appointment appointment) 
+    {
         appointments.add(appointment);
         
         // Update appointments by student map
@@ -42,39 +47,47 @@ public class WellnessManager {
         appointmentsByStudent.computeIfAbsent(student, k -> new ArrayList<>()).add(appointment);
     }
     
-    public List<Appointment> getUpcomingAppointments() {
+    public List<Appointment> getUpcomingAppointments() 
+    {
         return appointments.stream()
                 .filter(Appointment::isUpcoming)
                 .sorted(Comparator.comparing(Appointment::getDate))
                 .collect(Collectors.toList());
     }
     
-    public List<Appointment> getAppointmentsByStudent(String student) {
+    public List<Appointment> getAppointmentsByStudent(String student) 
+    {
         return appointmentsByStudent.getOrDefault(student, new ArrayList<>());
     }
     
-    public void addCounselor(Counselor counselor) {
+    public void addCounselor(Counselor counselor) 
+    {
         counselors.add(counselor);
-        if (counselor.isAvailable()) {
+        if (counselor.isAvailable()) 
+        {
             availableCounselors.add(counselor.getName());
         }
     }
     
-    public Set<String> getAvailableCounselors() {
+    public Set<String> getAvailableCounselors() 
+    {
         return new HashSet<>(availableCounselors);
     }
     
-    public void addFeedback(Feedback feedback) {
+    public void addFeedback(Feedback feedback) 
+    {
         feedbackList.add(feedback);
     }
     
-    public List<Feedback> getPositiveFeedback() {
+    public List<Feedback> getPositiveFeedback() 
+    {
         return feedbackList.stream()
                 .filter(Feedback::isPositive)
                 .collect(Collectors.toList());
     }
     
-    public double getAverageRating() {
+    public double getAverageRating() 
+    {
         return feedbackList.stream()
                 .mapToInt(Feedback::getRating)
                 .average()
