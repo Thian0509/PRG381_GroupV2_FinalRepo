@@ -16,7 +16,7 @@ import mvc.models.*;
  *
  * @author tshep
  */
-@WebServlet(name = "dashboardController", urlPatterns = {"/", "/dashboard"})
+@WebServlet(name = "dashboardController", urlPatterns = {"/dashboard"})
 public class dashboardController extends HttpServlet {
 
     @Override

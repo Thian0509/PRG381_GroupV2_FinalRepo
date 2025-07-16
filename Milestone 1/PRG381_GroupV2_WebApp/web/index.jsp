@@ -4,8 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BC Wellness - Register</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/public/styles.css">
+        <title>BC Wellness Management System</title>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/styles.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     </head>
     <style>
@@ -1306,11 +1306,11 @@
                     <span>BC Wellness</span>
                 </div>
                 <div class="nav-links">
-                    <a href="http://localhost:8080/PRG381_Group_V2_WebApp/index">
-                        <i class="fas fa-home"></i> Home
-                    </a>
                     <a href="http://localhost:8080/PRG381_Group_V2_WebApp/login">
                         <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="http://localhost:8080/PRG381_Group_V2_WebApp/register">
+                        <i class="fas fa-user-plus"></i> Register
                     </a>
                     <a href="http://localhost:8080/PRG381_Group_V2_WebApp/dashboard">
                         <i class="fas fa-tachometer-alt"></i> Dashboard
@@ -1319,175 +1319,275 @@
             </div>
         </div>
 
-        <div class="main-container">
-            <div class="auth-container register-container">
-                <div class="auth-header">
-                    <div class="auth-icon">
-                        <i class="fas fa-user-plus"></i>
-                    </div>
-                    <h1>Join BC Wellness</h1>
-                    <p>Create your account to access wellness services</p>
-                </div>
-
-                <c:if test="${not empty errorMessage}">
-                    <div class="alert alert-error">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span>${errorMessage}</span>
-                    </div>
-                </c:if>
-
-                <form action="register" method="post" class="auth-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="studentNumber">
-                                <i class="fas fa-id-card"></i> Student Number
-                            </label>
-                            <input type="text" 
-                                   id="studentNumber" 
-                                   name="studentNumber" 
-                                   placeholder="e.g., 12345678"
-                                   required
-                                   pattern="[0-9]{8}"
-                                   title="Student number must be 8 digits">
+        <div class="home-container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Welcome to <span class="highlight">BC Wellness</span></h1>
+                        <p class="hero-subtitle">Your comprehensive student wellness management system</p>
+                        <p class="hero-description">
+                            Empowering students with easy access to wellness services, appointment booking, 
+                            counseling support, and health resources all in one place.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/register" class="btn btn-primary btn-large">
+                                <i class="fas fa-user-plus"></i> Get Started
+                            </a>
+                            <a href="http://localhost:8080/PRG381_Group_V2_WebApp/login" class="btn btn-secondary btn-large">
+                                <i class="fas fa-sign-in-alt"></i> Sign In
+                            </a>
                         </div>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">
-                                <i class="fas fa-user"></i> First Name
-                            </label>
-                            <input type="text" 
-                                   id="name" 
-                                   name="name" 
-                                   placeholder="Enter your first name"
-                                   required
-                                   autocomplete="given-name">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="surname">
-                                <i class="fas fa-user"></i> Last Name
-                            </label>
-                            <input type="text" 
-                                   id="surname" 
-                                   name="surname" 
-                                   placeholder="Enter your last name"
-                                   required
-                                   autocomplete="family-name">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">
-                                <i class="fas fa-envelope"></i> Email Address
-                            </label>
-                            <input type="email" 
-                                   id="email" 
-                                   name="email" 
-                                   placeholder="your.email@example.com"
-                                   required
-                                   autocomplete="email">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">
-                                <i class="fas fa-phone"></i> Phone Number
-                            </label>
-                            <input type="tel" 
-                                   id="phone" 
-                                   name="phone" 
-                                   placeholder="e.g., +27 12 345 6789"
-                                   required
-                                   autocomplete="tel">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="password">
-                                <i class="fas fa-lock"></i> Password
-                            </label>
-                            <div class="password-input">
-                                <input type="password" 
-                                       id="password" 
-                                       name="password" 
-                                       placeholder="Create a strong password"
-                                       required
-                                       autocomplete="new-password"
-                                       minlength="8">
-                                <button type="button" class="password-toggle" onclick="togglePassword('password', 'toggleIcon1')">
-                                    <i class="fas fa-eye" id="toggleIcon1"></i>
-                                </button>
+                    <div class="hero-image">
+                        <div class="hero-graphic">
+                            <div class="wellness-icon">
+                                <i class="fas fa-heartbeat"></i>
                             </div>
-                            <div class="password-strength">
-                                <div class="strength-bar">
-                                    <div class="strength-fill" id="strengthBar"></div>
+                            <div class="floating-elements">
+                                <div class="floating-element element-1">
+                                    <i class="fas fa-user-md"></i>
                                 </div>
-                                <span class="strength-text" id="strengthText">Password strength</span>
+                                <div class="floating-element element-2">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="floating-element element-3">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div class="floating-element element-4">
+                                    <i class="fas fa-heart"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-user-plus"></i> Create Account
-                    </button>
-                </form>
-
-                <div class="auth-footer">
-                    <p>Already have an account? 
-                        <a href="http://localhost:8080/PRG381_Group_V2_WebApp/login">Sign in here</a>
-                    </p>
                 </div>
-            </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <div class="section-header">
+                    <h2>Why Choose BC Wellness?</h2>
+                    <p>Comprehensive wellness services designed for student success</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Easy Appointment Booking</h3>
+                        <p>Schedule appointments with counselors and wellness professionals with just a few clicks.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <h3>Professional Counseling</h3>
+                        <p>Access qualified counselors and mental health professionals for personalized support.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Progress Tracking</h3>
+                        <p>Monitor your wellness journey with detailed progress reports and personalized insights.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Secure & Confidential</h3>
+                        <p>Your privacy is our priority with encrypted data and confidential service delivery.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile Friendly</h3>
+                        <p>Access wellness services anywhere, anytime with our responsive mobile-friendly platform.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Round-the-clock support and resources available whenever you need assistance.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section class="services-section">
+                <div class="section-header">
+                    <h2>Our Wellness Services</h2>
+                    <p>Comprehensive support for your mental, physical, and emotional well-being</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Mental Health Support</h3>
+                        <p>Professional counseling, therapy sessions, and mental health resources to support your emotional well-being.</p>
+                        <ul>
+                            <li>Individual counseling sessions</li>
+                            <li>Group therapy programs</li>
+                            <li>Crisis intervention support</li>
+                            <li>Stress management workshops</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Academic Support</h3>
+                        <p>Resources and guidance to help you succeed in your academic journey and manage study-related stress.</p>
+                        <ul>
+                            <li>Study skills workshops</li>
+                            <li>Time management training</li>
+                            <li>Academic counseling</li>
+                            <li>Exam preparation support</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h3>Physical Wellness</h3>
+                        <p>Programs and resources to maintain your physical health and promote an active lifestyle.</p>
+                        <ul>
+                            <li>Fitness programs</li>
+                            <li>Nutrition counseling</li>
+                            <li>Health screenings</li>
+                            <li>Wellness challenges</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number">1,250+</div>
+                        <div class="stat-label">Students Served</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Professional Counselors</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support Available</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2>Ready to Start Your Wellness Journey?</h2>
+                    <p>Join thousands of students who have already improved their well-being with BC Wellness</p>
+                    <div class="cta-buttons">
+                        <a href="http://localhost:8080/PRG381_Group_V2_WebApp/register" class="btn btn-primary btn-large">
+                            <i class="fas fa-user-plus"></i> Register Now
+                        </a>
+                        <a href="http://localhost:8080/PRG381_Group_V2_WebApp/login" class="btn btn-outline btn-large">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <script>
-            function togglePassword(inputId, iconId) {
-                const passwordInput = document.getElementById(inputId);
-                const toggleIcon = document.getElementById(iconId);
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>BC Wellness</span>
+                    </div>
+                    <p>Empowering student wellness through comprehensive support and resources.</p>
+                </div>
                 
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    toggleIcon.classList.remove('fa-eye');
-                    toggleIcon.classList.add('fa-eye-slash');
-                } else {
-                    passwordInput.type = 'password';
-                    toggleIcon.classList.remove('fa-eye-slash');
-                    toggleIcon.classList.add('fa-eye');
-                }
-            }
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="http://localhost:8080/PRG381_Group_V2_WebApp/login">Login</a></li>
+                        <li><a href="http://localhost:8080/PRG381_Group_V2_WebApp/register">Register</a></li>
+                        <li><a href="http://localhost:8080/PRG381_Group_V2_WebApp/dashboard">Dashboard</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Mental Health Support</a></li>
+                        <li><a href="#">Academic Counseling</a></li>
+                        <li><a href="#">Physical Wellness</a></li>
+                        <li><a href="#">Crisis Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Emergency</h4>
+                    <p>If you're in crisis, please contact:</p>
+                    <p><strong>Crisis Hotline: 0800-123-456</strong></p>
+                    <p><strong>Campus Security: 0800-789-012</strong></p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 BC Wellness Management System. All rights reserved.</p>
+            </div>
+        </footer>
 
-            // Password strength checker
-            document.getElementById('password').addEventListener('input', function() {
-                const password = this.value;
-                const strengthBar = document.getElementById('strengthBar');
-                const strengthText = document.getElementById('strengthText');
-                
-                let strength = 0;
-                let feedback = '';
-                
-                if (password.length >= 8) strength++;
-                if (password.match(/[a-z]/)) strength++;
-                if (password.match(/[A-Z]/)) strength++;
-                if (password.match(/[0-9]/)) strength++;
-                if (password.match(/[^a-zA-Z0-9]/)) strength++;
-                
-                const strengthLevels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
-                const strengthColors = ['#ff4444', '#ff8800', '#ffcc00', '#88cc00', '#44aa44'];
-                
-                if (password.length === 0) {
-                    strengthBar.style.width = '0%';
-                    strengthText.textContent = 'Password strength';
-                    strengthText.style.color = '#666';
-                } else {
-                    const percentage = (strength / 5) * 100;
-                    strengthBar.style.width = percentage + '%';
-                    strengthBar.style.backgroundColor = strengthColors[strength - 1];
-                    strengthText.textContent = strengthLevels[strength - 1];
-                    strengthText.style.color = strengthColors[strength - 1];
-                }
+        <script>
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Animate floating elements
+            const floatingElements = document.querySelectorAll('.floating-element');
+            floatingElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.5}s`;
+            });
+
+            // Animate stats on scroll
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.stat-item').forEach(item => {
+                observer.observe(item);
             });
         </script>
     </body>
