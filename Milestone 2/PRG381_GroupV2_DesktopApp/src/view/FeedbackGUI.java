@@ -23,7 +23,7 @@ public class FeedbackGUI extends javax.swing.JPanel {
 
     private void setupTable() {
         tableModel = (DefaultTableModel) tblFeedback.getModel();
-        tableModel.setColumnIdentifiers(new String[]{"ID", "Student", "Rating", "Comments"});
+        tableModel.setColumnIdentifiers(new String[]{"ID", "Rating", "Comments"});
         tblFeedback.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
@@ -36,32 +36,34 @@ public class FeedbackGUI extends javax.swing.JPanel {
 
     private void loadFeedback() {
         tableModel.setRowCount(0);
-        
+
         try {
             List<Feedback> feedbackList = feedbackController.getAllFeedback();
             for (Feedback feedback : feedbackList) {
                 tableModel.addRow(new Object[]{
-                    feedback.getId(),
-                    feedback.getStudent(),
+                    feedback.getId(), // Internal use (can be hidden from view)
                     feedback.getRating(),
                     feedback.getComment()
                 });
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error loading feedback: " + e.getMessage(), 
-                                        "Database Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error loading feedback: " + e.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void setupEventListeners() {
         btnSubmitFeedback.addActionListener(e -> submitFeedback());
         
-        // Add table selection listener to populate form fields
         tblFeedback.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                populateFormFromSelection();
-            }
-        });
+    if (!e.getValueIsAdjusting()) {
+        int row = tblFeedback.getSelectedRow();
+        if (row >= 0) {
+            cbRating.setSelectedItem(tblFeedback.getValueAt(row, 1).toString());  // Rating
+            txtaComment.setText(tblFeedback.getValueAt(row, 2).toString());        // Comment
+        }
+    }
+});
     }
 
     private void submitFeedback() {
@@ -78,7 +80,7 @@ public class FeedbackGUI extends javax.swing.JPanel {
 
             if (feedbackController.addFeedback(feedback)) {
                 JOptionPane.showMessageDialog(this, "Feedback submitted successfully!");
-                clearInputs();
+                clearFeedbackInputs();
                 loadFeedback();
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to submit feedback", 
@@ -115,11 +117,11 @@ public class FeedbackGUI extends javax.swing.JPanel {
         return true;
     }
 
-    private void clearInputs() {
-        cbRating.setSelectedIndex(0);
-        txtaComment.setText("");
-        tblFeedback.clearSelection();
-    }
+    private void clearFeedbackInputs() {
+    cbRating.setSelectedIndex(0);
+    txtaComment.setText("");
+    tblFeedback.clearSelection();
+}
 
     private void resetSubmitButton() {
         btnSubmitFeedback.setText("Submit Feedback");
@@ -195,13 +197,13 @@ public class FeedbackGUI extends javax.swing.JPanel {
 
         tblFeedback.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Rating", "Comment"
+                "Id", "Rating", "Comment"
             }
         ));
         jScrollPane2.setViewportView(tblFeedback);
@@ -224,8 +226,18 @@ public class FeedbackGUI extends javax.swing.JPanel {
         );
 
         btnEditFeedback.setText("Edit Feedback");
+        btnEditFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditFeedbackActionPerformed(evt);
+            }
+        });
 
         btnDeleteFeedback.setText("Delete Feedback");
+        btnDeleteFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteFeedbackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -272,6 +284,61 @@ public class FeedbackGUI extends javax.swing.JPanel {
                 .addContainerGap(147, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEditFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditFeedbackActionPerformed
+        // TODO add your handling code here:
+        int row = tblFeedback.getSelectedRow();
+
+        if (row >= 0) {
+            try {
+                int id = Integer.parseInt(tblFeedback.getValueAt(row, 0).toString()); // ID from column 0
+                int rating = Integer.parseInt(cbRating.getSelectedItem().toString());
+                String comment = txtaComment.getText().trim();
+                String student = CURRENT_USER; // still using current user identity
+
+                Feedback updated = new Feedback(id, student, rating, comment);
+
+                if (feedbackController.updateFeedback(updated)) {
+                    JOptionPane.showMessageDialog(this, "Feedback updated successfully!");
+                    loadFeedback();
+                    clearFeedbackInputs();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to update feedback.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error updating feedback: " + ex.getMessage(),
+                        "Unexpected Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+        }
+
+
+    }//GEN-LAST:event_btnEditFeedbackActionPerformed
+
+    private void btnDeleteFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFeedbackActionPerformed
+        // TODO add your handling code here:
+        int row = tblFeedback.getSelectedRow();
+
+    if (row >= 0) {
+        String id = tblFeedback.getValueAt(row, 0).toString(); // ID from column 0
+
+        boolean success = feedbackController.deleteFeedback(id);
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Feedback deleted successfully!");
+            loadFeedback();
+            clearFeedbackInputs();
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to delete feedback.",
+                                          "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+    }
+
+
+    }//GEN-LAST:event_btnDeleteFeedbackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

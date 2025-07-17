@@ -84,4 +84,38 @@ public class AppointmentController
                appointment.getDate() != null && !appointment.getDate().trim().isEmpty() &&
                appointment.getTime() != null && !appointment.getTime().trim().isEmpty();
     }
+    
+    public boolean deleteAppointment(String id) {
+    String query = "DELETE FROM appointments WHERE id = ?";
+
+    try {
+        Connection conn = dBConnection.getWellnessConnection();
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, id);
+            return ps.executeUpdate() > 0;
+        }
+    } catch (SQLException | ClassNotFoundException e) {
+        e.printStackTrace();
+        return false;
+    }
+    }
+    
+    public boolean updateAppointment(Appointment appointment) {
+    String sql = "UPDATE appointments SET student = ?, counselor = ?, date = ?, time = ?, status = ? WHERE id = ?";
+    try (Connection conn = dBConnection.getWellnessConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setString(1, appointment.getStudent());
+        ps.setString(2, appointment.getCounselor());
+        ps.setString(3, appointment.getDate());
+        ps.setString(4, appointment.getTime());
+        ps.setString(5, appointment.getStatus());
+        ps.setInt(6, appointment.getId());
+
+        return ps.executeUpdate() > 0;
+    } catch (SQLException | ClassNotFoundException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
 }

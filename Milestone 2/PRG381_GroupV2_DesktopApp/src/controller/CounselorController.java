@@ -61,4 +61,36 @@ public class CounselorController
         }
         return counselors;
     }
+    
+    public boolean updateCounselor(Counselor counselor) {
+    String sql = "UPDATE counselors SET name = ?, specialization = ?, availability = ? WHERE id = ?";
+    
+    try (Connection conn = dBConnection.getWellnessConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        
+        ps.setString(1, counselor.getName());
+        ps.setString(2, counselor.getSpecialization());
+        ps.setBoolean(3, counselor.isAvailable());
+        ps.setInt(4, counselor.getId());
+
+        return ps.executeUpdate() > 0;
+    } catch (SQLException | ClassNotFoundException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+    
+    public boolean deleteCounselor(String id) {
+    String sql = "DELETE FROM counselors WHERE id = ?";
+
+    try (Connection conn = dBConnection.getWellnessConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        
+        ps.setString(1, id);
+        return ps.executeUpdate() > 0;
+    } catch (SQLException | ClassNotFoundException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
 }

@@ -184,8 +184,18 @@ public class AppointmentGUI extends javax.swing.JPanel {
     }
 
     private void setupEventListeners() {
-        btnBookAppointment.addActionListener(e -> bookAppointment());
-    }
+    btnBookAppointment.addActionListener(e -> bookAppointment());
+
+    tblAppointment.getSelectionModel().addListSelectionListener(e -> {
+        int row = tblAppointment.getSelectedRow();
+        if (row >= 0) {
+            txtDate.setText(tblAppointment.getValueAt(row, 3).toString());      // date
+            txtTime.setText(tblAppointment.getValueAt(row, 4).toString());      // time
+            cbStudent.setSelectedItem(tblAppointment.getValueAt(row, 1).toString()); // student
+            cbCouncelor.setSelectedItem(tblAppointment.getValueAt(row, 2).toString()); // counselor
+        }
+    });
+}
 
     private void bookAppointment() {
         if (!validateInputs()) {
@@ -398,8 +408,18 @@ public class AppointmentGUI extends javax.swing.JPanel {
         );
 
         btnEditAppointment.setText("Edit Appointment");
+        btnEditAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditAppointmentActionPerformed(evt);
+            }
+        });
 
         btnCancelAppointment.setText("Cancel Appointment");
+        btnCancelAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelAppointmentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -446,6 +466,63 @@ public class AppointmentGUI extends javax.swing.JPanel {
                 .addContainerGap(219, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEditAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditAppointmentActionPerformed
+        // TODO add your handling code here:
+        int row = tblAppointment.getSelectedRow();
+        if (row >= 0) {
+        String id = tblAppointment.getValueAt(row, 0).toString(); // assuming ID is in column 0
+
+        Appointment updated = new Appointment(
+            Integer.parseInt(id),
+            cbStudent.getSelectedItem().toString(),
+            cbCouncelor.getSelectedItem().toString(),
+            txtDate.getText().trim(),
+            txtTime.getText().trim(),
+            "Scheduled" // or allow user to select status if needed
+        );
+
+        if (appointmentController.updateAppointment(updated)) {
+            JOptionPane.showMessageDialog(null, "Appointment updated successfully!");
+            loadAppointments(); // Refresh the table
+            clearInputs();      // Reset the form
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to update appointment.",
+                                          "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Please select a row to update.");
+    }        
+    }//GEN-LAST:event_btnEditAppointmentActionPerformed
+
+    private void btnCancelAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAppointmentActionPerformed
+        // TODO add your handling code here:
+        int rowIndexToRemove = tblAppointment.getSelectedRow();
+        
+        if (rowIndexToRemove >= 0) {
+            DefaultTableModel model = (DefaultTableModel) tblAppointment.getModel();
+
+            // Assuming column 0 holds a unique ID for the appointment
+            Object appointmentIdObj = model.getValueAt(rowIndexToRemove, 0);
+            if (appointmentIdObj != null) {
+                String appointmentId = appointmentIdObj.toString();
+
+                // Delete from database
+                boolean success = appointmentController.deleteAppointment(appointmentId);
+                if (success) {
+                    // Delete from table model
+                    model.removeRow(rowIndexToRemove);
+                    JOptionPane.showMessageDialog(null, "Appointment deleted successfully!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Failed to delete appointment from database.",
+                                                  "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete.");
+        }
+
+    }//GEN-LAST:event_btnCancelAppointmentActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

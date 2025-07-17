@@ -61,4 +61,33 @@ public class FeedbackController {
         }
         return feedbackList;
     }
+    
+    public boolean updateFeedback(Feedback feedback) {
+        String sql = "UPDATE feedback SET rating = ?, comments = ? WHERE id = ?";
+
+        try (Connection conn = dBConnection.getWellnessConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, feedback.getRating());
+            ps.setString(2, feedback.getComment());
+            ps.setInt(3, feedback.getId());
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteFeedback(String id) {
+        String sql = "DELETE FROM feedback WHERE id = ?";
+
+        try (Connection conn = dBConnection.getWellnessConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

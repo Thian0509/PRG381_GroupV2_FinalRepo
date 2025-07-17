@@ -89,6 +89,16 @@ public class CounselorGUI extends javax.swing.JPanel {
                 populateFormFromSelection();
             }
         });
+        
+        tblCouncelor.getSelectionModel().addListSelectionListener(e -> {
+    int row = tblCouncelor.getSelectedRow();
+    if (row >= 0) {
+        txtCounselorName.setText(tblCouncelor.getValueAt(row, 1).toString());
+        txtSpecialization.setText(tblCouncelor.getValueAt(row, 2).toString());
+        cbAvailablility.setSelected(Boolean.parseBoolean(tblCouncelor.getValueAt(row, 3).toString()));
+    }
+
+});
     }
 
     private void addCounselor() {
@@ -257,8 +267,18 @@ public class CounselorGUI extends javax.swing.JPanel {
         );
 
         btnUpdateCouncelor.setText("Update Counselor");
+        btnUpdateCouncelor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateCouncelorActionPerformed(evt);
+            }
+        });
 
         btnDeleteCouncelor.setText("Delete Counselor");
+        btnDeleteCouncelor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCouncelorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -305,6 +325,53 @@ public class CounselorGUI extends javax.swing.JPanel {
                 .addContainerGap(262, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUpdateCouncelorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCouncelorActionPerformed
+        // TODO add your handling code here:
+        int row = tblCouncelor.getSelectedRow();
+    if (row >= 0) {
+        String id = tblCouncelor.getValueAt(row, 0).toString(); // Column 0 assumed to be ID
+
+        Counselor updated = new Counselor(
+            Integer.parseInt(id),
+            txtCounselorName.getText().trim(),
+            txtSpecialization.getText().trim(),
+            cbAvailablility.isSelected()
+        );
+
+        if (counselorController.updateCounselor(updated)) {
+            JOptionPane.showMessageDialog(null, "Counselor updated successfully!");
+            loadCounselors();
+            clearInputs();
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to update counselor.",
+                                          "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Please select a row to update.");
+    }
+
+    }//GEN-LAST:event_btnUpdateCouncelorActionPerformed
+
+    private void btnDeleteCouncelorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCouncelorActionPerformed
+        // TODO add your handling code here:
+        int row = tblCouncelor.getSelectedRow();
+    if (row >= 0) {
+        String id = tblCouncelor.getValueAt(row, 0).toString();
+
+        boolean success = counselorController.deleteCounselor(id);
+        if (success) {
+            JOptionPane.showMessageDialog(null, "Counselor deleted successfully!");
+            loadCounselors();
+            clearInputs();
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to delete counselor.",
+                                          "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Please select a row to delete.");
+    }
+    }//GEN-LAST:event_btnDeleteCouncelorActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
