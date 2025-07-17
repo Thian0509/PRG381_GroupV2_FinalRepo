@@ -4,7 +4,7 @@ import view.DashboardGUI;
 import model.DBConnection;
 import javax.swing.SwingUtilities;
 import javax.swing.JOptionPane;
-import java.sql.SQLException;
+import java.sql.SQLException; 
 
 /**
  *

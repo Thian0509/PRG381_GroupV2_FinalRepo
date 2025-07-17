@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Thu Jul 17 23:32:29 SAST 2025D001 : [0] The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217), [1] a816c00e-0198-1a4d-97c5-00000f18f1b8, [2] C:\Users\thian\OneDrive\Documents\GitHub\PRG381_GroupV2_FinalRepo\Milestone 2\PRG381_GroupV2_DesktopApp\wellnessDB, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@3f99bd52, [4] file:/C:/Users/thian/Downloads/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=21.0.7+8-LTS-245
-user.dir=C:\Users\thian\OneDrive\Documents\GitHub\PRG381_GroupV2_FinalRepo\Milestone 2\PRG381_GroupV2_DesktopApp
+Thu Jul 17 23:51:30 SAST 2025D001 : [0] The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217), [1] a816c00e-0198-1a5e-fe9b-0000056e3d08, [2] C:\Users\tshep\OneDrive\Desktop\PRG381_GroupV2_FinalRepo\Milestone 2\PRG381_GroupV2_DesktopApp\wellnessDB, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@75b84c92, [4] file:/C:/Users/tshep/Downloads/derby%20jar%20files/derby.jar
+java.vendor=Azul Systems, Inc.
+java.runtime.version=24.0.1+9
+user.dir=C:\Users\tshep\OneDrive\Desktop\PRG381_GroupV2_FinalRepo\Milestone 2\PRG381_GroupV2_DesktopApp
 os.name=Windows 11
 os.arch=amd64
 os.version=10.0
